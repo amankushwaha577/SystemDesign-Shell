@@ -29,8 +29,9 @@ Horizontal Scaling (Scaling Out) vs 2. Vertical Scaling (Scaling Up) :
     a. Data Consistency Issues ❌: Since data is spread across multiple nodes, ensuring strong consistency is difficult.
                                    Ex : If operation has to be atomic we need to lock all the servers & DB that we are using for
                                         that operation.
-    b. Complexity in Architecture ❌: Requires load balancing, distributed nodes coordination.
-    c. High Latency (delay) ❌: Requires distributed database techniques like replication, sharding, and quorum-based updates.
+    b. Complexity in Architecture ❌: It Requires load balancing, distributed nodes coordination.
+    c. High Latency (delay) ❌: It Requires distributed database techniques like replication (dupliacting DB), sharding.
+                                 Read/write may require Time taking algo : Paxos, Raft
 
 
 2. Vertical Scaling :
