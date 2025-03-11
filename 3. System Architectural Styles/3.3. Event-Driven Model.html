@@ -1,0 +1,21 @@
+<!-- 
+3. Event-Driven Model :
+-----------------------
+The Event-Driven Model is an asynchronous communication pattern.
+where services communicate by emitting and responding to events instead of directly calling each other. 
+
+Note : Events are generated when a change occurs, and other services react to these events without needing to know their source service.
+
+Note : The sender and receiver service do not directly communicate with each other, 
+       they don't know about each other,
+       making the system loosely coupled and scalable.
+
+Workflow:
+--------
+1. An event occurs : A user action, system change, or an external trigger (e.g., "Order Placed").
+                     The event is sent to an Event Bus.
+2. Event Bus (Kafka / RabbitMQ / AWS EventBridge) receives the event.
+3. Subscribers listen to the event – Multiple services can consume the event and take independent actions.
+
+Note : Services react asynchronously – Services process the event without blocking each other.
+-->
