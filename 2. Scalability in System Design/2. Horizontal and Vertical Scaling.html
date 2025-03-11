@@ -3,12 +3,15 @@
     a. Approach: 
        In Horizontal Scaling we Add more machines (nodes/servers) to distribute the load.
        In Vertical Scaling we add more resources (CPU, RAM, disk) in a single machine.
+   
     b. Data Storage: 
        Horizontal scaling uses   distributed databases (e.g., Cassandra, MongoDB).
        Vertical Scaling   Uses a single-node database for Good consistency ( MySQL or PostgreSQL ) .
+
     c. Communication Model: 
-       Horizonatal Scaling uses Network-based communication (requests between nodes).
-       Vertical Scaling uses In-memory communication (processes talk within the same machine).
+       Horizonatal Scaling uses Network-based communication to talk with nodes. (Protocols like HTTP, gRPC, WebSockets, or Message Queues (RabbitMQ, Kafka))
+       Vertical Scaling uses In-memory communication to talk within the same machine. (function calls)
+
     b. Common Use Cases: 
        Horizontal Scaling is used in Distributed systems, cloud computing (e.g., Kubernetes, Microservices, AWS Auto Scaling ).
        Vertical Scaling  is used  in Monolithic applications, relational databases (e.g., MySQL, PostgreSQL).
