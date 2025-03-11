@@ -26,14 +26,11 @@ Horizontal Scaling (Scaling Out) vs 2. Vertical Scaling (Scaling Up) :
     c. No Single Point of Failure ✅: We have multipe servers so If one server fails, others server will handle the load. System will not go down.
 
 ❌ Disadvantages:
-    a. Data Consistency Issues ❌: Since data is spread across multiple nodes, ensuring strong consistency is difficult 
-                                   (eventual consistency is often used).
+    a. Data Consistency Issues ❌: Since data is spread across multiple nodes, ensuring strong consistency is difficult.
                                    Ex : If operation has to be atomic we need to lock all the servers & DB that we are using for
                                         that operation.
-    b. Complexity ❌: Requires load balancing, 
-                               distributed nodes coordination, and 
-                               replication management.
-    c. Overhead in DB ( High Latency ) ❌: Requires distributed database techniques like replication, sharding, and quorum-based updates.
+    b. Complexity in Architecture ❌: Requires load balancing, distributed nodes coordination.
+    c. Complexity in DB - High Latency❌: Requires distributed database techniques like replication, sharding, and quorum-based updates.
 
 
 2. Vertical Scaling :
