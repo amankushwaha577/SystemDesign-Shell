@@ -1,0 +1,32 @@
+<!-- 
+1. Request-Response Model :
+---------------------------
+The Request-Response Model follows a synchronous communication pattern where a client sends a request to a service (server) 
+and waits for a response.
+
+How It Works:
+a. Client sends a request (e.g., HTTP request, API call).
+b. Server processes the request and sends back a response.
+c. Client waits for the response before proceeding.
+
+Example:
+1. REST APIs (e.g., GET /users/123 → returns user details).
+2. gRPC (Remote Procedure Calls).
+3. Database Queries (SQL queries return results synchronously).
+
+
+Advantages:
+✅ 1. Simple and easy to implement.
+✅ 2. Immediate response.
+✅ 3. Ideal for CRUD (Create, Read, Update, Delete) operations.
+
+Disadvantages:
+❌ 1. Client is blocked until the server responds (can cause delays).
+❌ 2. Harder to scale under heavy traffic.
+❌ 3. Increased latency if network issues exist.
+
+Best Use Cases:
+1. Traditional web applications.
+2. Fetching data from APIs.
+3. Synchronous services requiring immediate results. 
+-->

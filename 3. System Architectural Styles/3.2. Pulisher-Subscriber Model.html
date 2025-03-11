@@ -1,0 +1,41 @@
+<!-- 
+2. Publisher-Subscriber (Pub/Sub) Model :
+-----------------------------------------
+The Publisher-Subscriber (Pub/Sub) Model is an asynchronous communication pattern.
+where a publisher sends messages to a message broker, and subscribers receive those messages if they are subscribed to the topic. 
+
+Note : The publisher and subscriber do not directly communicate with each other, 
+       they don't know about each other,
+       making the system loosely coupled and scalable.
+
+How the Pub/Sub Model Works (Step-by-Step):
+-----------------------------------------
+a. Publisher Sends Messages :
+   A publisher publishes a message to a "topic" in a message broker (e.g., Kafka, RabbitMQ, Google Pub/Sub).
+   The message broker acts as an intermediary.
+
+b. Message Broker Distributes Messages :
+   The broker ensures messages are delivered to all interested subscribers who have subscribed to the topic.
+   The publisher does not know who the subscribers are.
+
+c. Subscribers Receive Messages
+   Any service (subscriber) that has subscribed to the topic receives the message.
+   Multiple subscribers can receive the same message.
+
+Advantages:
+✅ 1. Decoupling              – Publishers and subscribers don’t know about each other.
+✅ 2. Scalability             – Any new service(subscriber) can be added easily.
+✅ 3. Asynchronous Processing – No need to wait for an immediate response.
+
+Disadvantages:
+❌ 1. Message Loss        – If subscriber is offline, they will miss message.
+❌ 2. Complex Debugging   – Difficult to trace issues as services don’t directly communicate.
+❌ 3. Latency             – Messages might be delayed if brokers are overloaded.
+❌ 4. Message Duplication - Message might be sent multiple time due to system failure. 
+❌ 5. Message Ordering    - Message might not be in proper order if they are coming from different publisher. 
+
+Best Use Cases:
+Real-time notifications.
+Log processing and monitoring.
+Distributed systems with independent services.
+-->
