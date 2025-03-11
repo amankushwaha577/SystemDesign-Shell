@@ -1,4 +1,4 @@
-# System Design from Scratch - FANG Interview Preparation
+![alt text](image.png)# System Design from Scratch - FANG Interview Preparation
 
 ## 1. Understand the Problem Statement
 - Clarify functional and non-functional requirements.
