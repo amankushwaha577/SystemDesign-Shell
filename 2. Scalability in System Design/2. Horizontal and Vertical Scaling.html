@@ -1,4 +1,5 @@
 <!-- 
+Horizontal Scaling (Scaling Out) vs 2. Vertical Scaling (Scaling Up) 
     a. Approach: 
        In Horizontal Scaling we Add more machines (nodes/servers) to distribute the load.
        In Vertical Scaling we add more resources (CPU, RAM, disk) in a single machine.
@@ -17,7 +18,7 @@
        Horizontal Scaling is used in Distributed systems, cloud computing (e.g., Kubernetes, Microservices, AWS Auto Scaling ).
        Vertical Scaling  is used  in Monolithic applications, relational databases (e.g., MySQL, PostgreSQL).
 
-1. Horizontal Scaling (Scaling Out)
+1. Horizontal Scaling :
 ✅ Advantages:
     a. High Resilience ✅: If one server fails, others handle the load (fault tolerance).
     b. High Scalability ✅: More servers can be added dynamically.
@@ -34,7 +35,7 @@
     c. Overhead in DB ( High Latency ) ❌: Requires distributed database techniques like replication, sharding, and quorum-based updates.
 
 
-2. Vertical Scaling (Scaling Up) 
+2. Vertical Scaling :
 ✅ Advantages:
     a. Strong Data Consistency ✅: Since all operations happen on the same machine, maintaining ACID (Atomicity, Consistency, Isolation, Durability) properties is easier.
     b. Lower Complexity ✅: No need for Load balancing, distributed coordination or data replication.
