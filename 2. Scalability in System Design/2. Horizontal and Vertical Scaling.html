@@ -1,12 +1,13 @@
 <!-- 
-1. Horizontal Scaling (Scaling Out)
     a. Approach: 
        In Horizontal Scaling we Add more machines (nodes/servers) to distribute the load.
        In Vertical Scaling we add more resources (CPU, RAM, disk) in a single machine.
    
     b. Data Storage: 
        Horizontal scaling uses   distributed databases (e.g., Cassandra, MongoDB).
+           -> Read/write operations may require consensus algorithms like Paxos or Raft.
        Vertical Scaling   Uses a single-node database for Good consistency ( MySQL or PostgreSQL ) .
+           -> Ensures strong consistency (all read/write operations are immediately visible).
 
     c. Communication Model: 
        Horizonatal Scaling uses Network-based protocols to talk with nodes. (Protocols like HTTP, gRPC, WebSockets, or Message Queues (RabbitMQ, Kafka))
@@ -16,6 +17,7 @@
        Horizontal Scaling is used in Distributed systems, cloud computing (e.g., Kubernetes, Microservices, AWS Auto Scaling ).
        Vertical Scaling  is used  in Monolithic applications, relational databases (e.g., MySQL, PostgreSQL).
 
+1. Horizontal Scaling (Scaling Out)
 ✅ Advantages:
     a. High Resilience ✅: If one server fails, others handle the load (fault tolerance).
     b. High Scalability ✅: More servers can be added dynamically.
@@ -33,7 +35,6 @@
 
 
 2. Vertical Scaling (Scaling Up) 
-    
 ✅ Advantages:
     a. Strong Data Consistency ✅: Since all operations happen on the same machine, maintaining ACID (Atomicity, Consistency, Isolation, Durability) properties is easier.
     b. Lower Complexity ✅: No need for Load balancing, distributed coordination or data replication.
@@ -44,22 +45,3 @@
     b. Limited Scalability ❌: Hardware has a physical limit (cannot scale infinitely | cant make system too bigger ).
     c. Downtime Risk ❌: Upgrading the machine may require system restarts.
 -->
-
-<!-- 
-Horizontal Scaling Communication
-    a. Uses network-based protocols like HTTP, gRPC, WebSockets, or Message Queues (RabbitMQ, Kafka) for inter-node communication.
-       Example: In a microservices architecture, services communicate via REST APIs or gRPC.
-    b. Database Communication:
-       a. Uses distributed databases (e.g., Cassandra, DynamoDB, MongoDB).
-       b. Read/write operations may require consensus algorithms like Paxos or Raft.
-       c. Eventual consistency is common due to network delays.
-
-Vertical Scaling Communication
-    a. Uses in-memory communication between processes.
-       Example: A monolithic application where function calls or database queries happen within the same server.
-    b. Database Communication:
-       a. Uses single-node databases like MySQL or PostgreSQL.
-       b. Ensures strong consistency (all read/write operations are immediately visible).
-       c. Faster queries since there's no network overhead.
--->
-
