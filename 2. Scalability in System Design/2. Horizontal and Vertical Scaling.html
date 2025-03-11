@@ -6,9 +6,9 @@ Horizontal Scaling (Scaling Out) vs 2. Vertical Scaling (Scaling Up)
    
     b. Data Storage: 
        Horizontal scaling uses   distributed databases (e.g., Cassandra, MongoDB).
-           -> Read/write operations may require consensus algorithms like Paxos or Raft.
+           -> Read/write operations may require Time taking algorithms like Paxos or Raft. 
        Vertical Scaling   Uses a single-node database for Good consistency ( MySQL or PostgreSQL ) .
-           -> Ensures strong consistency (all read/write operations are immediately visible).
+           -> All read/write operations are immediately visible because of single DB.
 
     c. Communication Model: 
        Horizonatal Scaling uses Network-based protocols to talk with nodes. (Protocols like HTTP, gRPC, WebSockets, or Message Queues (RabbitMQ, Kafka))
