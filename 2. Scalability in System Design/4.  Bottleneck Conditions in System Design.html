@@ -3,10 +3,15 @@
 A bottleneck is a limiting factor in system performance that slows down the entire process. 
 It can exist in databases, networks, servers, authentication, third-party services, code execution, or data storage. 
 
-1️⃣ Database Bottlenecks – Slow queries, high read/write latency.
-✅ Solutions: Indexing, caching (Redis), sharding, query optimization.
+1️⃣ Database Bottlenecks – Slow queries,  inefficient indexing, high read/write latency.
+✅ Solutions: Proper Indexing + query optimization, sharding, caching (Redis).
+✅ Solutions:
+🔹 Use indexes and query optimization (e.g., PostgreSQL EXPLAIN ANALYZE).
+🔹 Implement sharding (e.g., MongoDB, MySQL partitioning).
+🔹 Implement caching layers like Redis or Memcached.
+🔹 Use read replicas for read-heavy workloads.
 
-2️⃣ Network Bottlenecks – High latency, limited bandwidth.
+2️⃣ Network Bottlenecks – High latency, Slow data transfer, limited bandwidth.
 ✅ Solutions: CDN, load balancing, compression, API optimization.
 
 3️⃣ Server Bottlenecks – High CPU/memory usage, request overload.
