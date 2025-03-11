@@ -30,15 +30,16 @@ Horizontal Scaling (Scaling Out) vs 2. Vertical Scaling (Scaling Up) :
                                    Ex : If operation has to be atomic we need to lock all the servers & DB that we are using for
                                         that operation.
     b. Complexity in Architecture ❌: It Requires load balancing, distributed nodes coordination.
-    c. High Latency (delay) ❌: It Requires distributed database techniques like replication (dupliacting DB), sharding.
+    c. High Latency (delay) ❌: It Requires distributed database techniques like replication (dupliacting Data), sharding.
                                  Read/write may require Time taking algo : Paxos, Raft
 
 
 2. Vertical Scaling :
 ✅ Advantages:
     a. Strong Data Consistency ✅: Since all operations happen on the same machine, maintaining ACID (Atomicity, Consistency, Isolation, Durability) properties is easier.
-    b. Lower Complexity ✅: No need for Load balancing, distributed coordination or data replication.
+    b. Lower Complexity ✅: No need for Load balancing, distributed coordination.
     c. Low Latency ✅: Faster data access as everything is on one machine.
+                        No data replication, No Sharding
 
 ❌ Disadvantages:
     a. Low Resilience ❌: If the machine fails, everything goes down (single point of failure).
