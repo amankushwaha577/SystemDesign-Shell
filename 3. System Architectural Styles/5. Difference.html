@@ -1,0 +1,35 @@
+<!-- 
+================================================================================================================
+|      Feature      |   Request-Response      | Publisher-Subscriber | Message-Driven      | Event-Driven       |
+================================================================================================================
+| Communication Type| Synchronous (Blocking)  | Asynchronous         | Asynchronous        | Asynchronous       |
+|                   |                         | (Non-blocking)       | (Queue-based)       | (Event-based)      |
+-----------------------------------------------------------------------------------------------------------------
+| Interaction       | Direct between sender   | One-to-Many          | One-to-One          | Many-to-Many       |
+|                   | & receiver              | (Multiple services   | (Each message is    | (Multiple event    |
+|                   |                         | receive the same msg)| consumed by one)    | producers & consumers) 
+----------------------------------------------------------------------------------------------------------------
+| Dependency        | Tightly coupled         | Loosely coupled      | Loosely coupled     | Highly decoupled   |
+|                   | (Services must know     | (Publishers don’t    | (Producer & Consumer| (Consumers react   |
+|                   | each other)             | know subscribers)    | are independent)    | dynamically to events) 
+----------------------------------------------------------------------------------------------------------------
+| Scalability       | Low (More requests      | High (Subscribers    | High (Queues allow  | Very High (Events  |
+|                   | cause blocking)         | scale independently) | distributed tasks)  | trigger multiple actions) 
+----------------------------------------------------------------------------------------------------------------
+| Message Handling  | Direct Response         | Broadcast            | Queued              | Event-triggered    |
+|                   | (Immediate reply)       | (All subscribers get | (One consumer       | (Multiple listeners |
+|                   |                         | the same message)    | per message)        | may react differently) |
+------------------------------------------------------------------------------------------------------------------
+| Example Use Cases | HTTP APIs, DB queries   | Notifications, Stock | Order Processing,   | User Signup triggers |
+|                   |                         | Price Updates        | Task Queues         | multiple services   |
+------------------------------------------------------------------------------------------------------------------
+| Example Tech      | REST APIs, gRPC         | Kafka, Redis Pub/Sub | RabbitMQ, AWS SQS   | AWS EventBridge,    |
+|                   |                         |                      |                     | Azure Event Grid    |
+==================================================================================================================
+
+Key Takeaways
+✅ Use Request-Response when you need immediate feedback.
+✅ Use Pub/Sub when multiple services need the same message.
+✅ Use Message-Driven when each task should be handled by exactly one service.
+✅ Use Event-Driven for highly reactive, dynamic systems.
+-->
