@@ -12,14 +12,26 @@ b. Every read operation of client must receive either i).  The most latest write
 
 2. Availability (A) :
 --------------------
-a. The system remains operational even if some nodes fail.
+a. The system remains operational even if some nodes down.
    If some nodes in the system are down. The system never rejects requests due to node failures.
 b. All the working nodes have to be able to respond to queries and answer even if it is with wrong or old data.
 c. Every read/write request receives a response whether i). Successful 
                                                        ii). Or an error.
-   
     
    Example: Amazon DynamoDB prioritizes high availability.
+
+3. Partition Tolerance (P) :
+---------------------------
+a. if network failures split the entire system into isolated partitions. The system continues to operate.
+   [In a distributed system, network failures are inevitable, so partition tolerance is mandatory.]
+b. But Here we need to choose either Consistency / Availability.
+   i).  If You choose "Consistency"  => you will become Unavailable.
+   ii). If You choose "Availability" => you will become InConsistent.
+
+   If you want consistency  just Reject Request. Say Service is Unavailable. So there will be no read/write operation.
+   if you want availability just accept Request. Say I am Available. So there will be read/write operation but DB's will be inconsistent because of Partitions.
+
+   Example: Apache Cassandra handles partition tolerance well.
 -->
 
 
@@ -75,7 +87,7 @@ c. Every read/write request receives a response whether i). Successful
     But we need to choose either consistency or Availability.
     If you choose -
     -------------
-    A. Consistency : If you want consistency just Reject Request.
+    A. Consistency : If you want consistency just Reject Request. Say Service is Unavailable.
                      (Because Nodes are not communicating they are separated).
                      If we write in Service-1 than Service-2 will become inconsistent.
 
