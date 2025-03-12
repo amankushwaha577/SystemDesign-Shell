@@ -3,16 +3,23 @@ The CAP Theorem states that a system can only guarantee two of three properties:
 
 1. Consistency (C) :
 -------------------
-a. Every Service in the system must have same data at the same time. 
-   This is because the services are constantly communicating with each other and sharing updates. 
-b. Every read operation of client must receive the most latest write or an error.
+a. Every node in the system must have same data at the same time. 
+   This is because the nodes are constantly communicating with each other and sharing updates. 
+b. Every read operation of client must receive either i).  The most latest write 
+                                                      ii). Or an error.
 
    Example: Traditional Relational Databases (RDBMS) ensure strong consistency.
 
 2. Availability (A) :
 --------------------
-
-
+a. The system remains operational even if some nodes fail.
+   If some nodes in the system are down. The system never rejects requests due to node failures.
+b. All the working nodes have to be able to respond to queries and answer even if it is with wrong or old data.
+c. Every read/write request receives a response whether i). Successful 
+                                                       ii). Or an error.
+   
+    
+   Example: Amazon DynamoDB prioritizes high availability.
 -->
 
 
