@@ -1,0 +1,53 @@
+<!-- 
+The CAP Theorem states that a system can only guarantee two of three properties: Consistency, Availability, and Partition Tolerance.  
+
+1. Consistency (C) :
+-------------------
+a. Every Service in the system must have same data at the same time. 
+   This is because the services are constantly communicating with each other and sharing updates. 
+b. Every read operation of client must receive the most latest write or an error.
+
+   Example: Traditional Relational Databases (RDBMS) ensure strong consistency.
+
+2. Availability (A) :
+--------------------
+
+
+-->
+
+
+
+<!-- 
+1. Suppose We are making a Application where clients can upload their documents.
+2. Suppose our application got hit and got lakhs of hit.
+3. Now we decided to Horizontally scale our application to improve the capacity.
+   (Let suppose Me and Hardik will maintain 2 diaries (means:servers).
+
+4. CONSISTENCY :
+   ------------
+   Now a client write request Req1 comes to service-1 with payload of a Adhaar card document.
+   Now Adhaar document is stored inside DB of Server1.
+   Here Now we will add this adhaar copy to DB of Service-2 to maintain "CONSISTENCY".
+
+                                Service-1                   Service-2
+                                    |                           |
+                                ---------                   ---------
+                                |       |                   |       |                      
+                                |   DB  | <-Both in Sync -> |   DB  |
+                                |       |                   |       |
+          Write  Req1 ----- ->  ---------                   ---------  
+     (Payload - Adhaar Card)   
+
+                                 Service-1                   Service-2
+                                    |                           |
+                                ---------                   ---------
+                                | Adhaar|                   | Adhaar|                      
+                                |  Card | <-Both in Sync -> |  Card |
+                                |       |                   |       |
+          read  Req1 ----- - >  ---------                   ---------  
+    
+    It's called consistency : If read request comes to Service-1 or Service-2 for this AdhaarCard
+                              Than both will return same output (AdhaarCard). 
+
+   
+-->
