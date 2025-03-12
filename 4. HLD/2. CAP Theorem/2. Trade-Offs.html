@@ -1,0 +1,49 @@
+<!-- 
+Since no distributed system can achieve Consistency (C), Availability (A), and Partition Tolerance (P) at the same time, system designers must trade off between these properties based on the use cas
+
+1. CP (Consistency + Partition Tolerance, but No Availability) :
+---------------------------------------------------------------
+a. Guarantees strong consistency and can handle network partitions.
+b. If a partition occurs, the system may become unavailable rather than serving stale data.
+
+   Example: Banking applications (a transaction must be consistent, even if it causes downtime).
+
+👉 Real-world Example:
+---------------------
+MongoDB (single-node mode): If a partition occurs, read/write operations may be blocked to maintain data consistency.
+
+Trade-off: Users may experience downtime or service unavailability.
+
+
+
+2. AP (Availability + Partition Tolerance, but No Strong Consistency) :
+----------------------------------------------------------------------
+a. Ensures high availability, even when network partitions occur.
+b. Allows eventual consistency (data may be stale for a short period).
+
+   Example: Social media feeds.
+
+👉 Real-world Example:
+----------------------
+Cassandra & DynamoDB: Nodes can serve older data if a partition occurs, ensuring users always get a response.
+
+Trade-off: The system allows inconsistencies that are eventually resolved.
+
+
+
+3. CA (Consistency + Availability, but No Partition Tolerance) – Theoretical
+--------------------------------------------------------------
+a. Can only be achieved in non-distributed systems.
+b. Works well when network partitions are not a concern.
+
+   Example: Single-node relational databases like MySQL (without replication).
+
+👉 Real-world Example:
+---------------------
+A single-node PostgreSQL database ensures that every read gets the latest write and is always available.
+But if the node fails, the system crashes.
+
+Trade-off: Lacks partition tolerance, making it unsuitable for distributed environments.
+
+
+-->
