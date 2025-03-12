@@ -12,9 +12,10 @@ b. Every read operation of client must receive either i).  The most latest write
 
 2. Availability (A) :
 --------------------
-a. The system remains operational even if some nodes down.
-   If some nodes in the system are down. The system never rejects requests due to node failures.
-b. All the working nodes have to be able to respond to queries and answer even if it is with wrong or old data.
+a. The system remains operational even if some nodes down.The system never rejects requests due to node failures.
+b. All the working nodes have to be able to respond to queries.
+   (It does't matter data in DB is updated one or not.)
+   
 c. Every read/write request receives a response whether i). Successful 
                                                        ii). Or an error.
     
@@ -68,7 +69,24 @@ b. But Here we need to choose either Consistency / Availability.
     It's called consistency : If read request comes to Service-1 or Service-2 for this AdhaarCard
                               Than both will return same output (AdhaarCard). 
 
-  
+5. Availability (A) :
+   ------------------
+    Let suppose Service of Hardik goes down than also our system will remains operational.
+    The system will never reject requests due to node failures.
+    we will happily take requests in service-1.
+                                Service-1                   Service-2
+                                    |                           |
+                                ---------                   ---------
+                                |       |                   |       |                      
+                                |   DB  |    ------  --     |   DB  |
+                                |       |                   |       |
+                                ---------                   ---------  
+                                                              ❌❌
+    Service-1 will take request read/write.
+    It does't matter data in DB is updated one or not.
+    
+    When failure node goes live it will communicate latest data from live node.
+    
                               
 6. Partition Tolerance (P) :
    ------------------------
