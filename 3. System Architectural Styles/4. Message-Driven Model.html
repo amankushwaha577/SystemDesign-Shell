@@ -1,0 +1,20 @@
+<!-- 
+In a Message-Driven Model, each message is processed by only one consumer, whereas in a Publish-Subscribe (Pub/Sub) Model,
+multiple consumers receive the same message.
+
+Flow :
+📤 Producer (Order Service) → Message Queue → One Consumer (Payment Service) 📥
+-------------------------------------------------------------------------------
+a. A message queue (MQ) ensures that each message is delivered to only one consumer.
+b. Once a consumer processes the message, it is removed from the queue.
+Example:
+An order processing system where only one payment service processes each order.
+
+
+🔹 How It Works :
+-----------------
+1. Producer (Sender): Sends a message to a message queue.
+2. Message Queue (Broker - RabbitMQ, Apache Kafka, AWS SQS): Stores messages until they are consumed.
+3. Consumer (Receiver): Listens to the queue and processes messages one by one.
+4. Acknowledgment (Optional): Once processed, the consumer sends an acknowledgment to remove the message from the queue.
+-->
