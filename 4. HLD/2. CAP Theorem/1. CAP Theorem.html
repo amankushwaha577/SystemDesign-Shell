@@ -56,5 +56,33 @@ c. Every read/write request receives a response whether i). Successful
     It's called consistency : If read request comes to Service-1 or Service-2 for this AdhaarCard
                               Than both will return same output (AdhaarCard). 
 
-   
+  
+                              
+6. Partition Tolerance (P) :
+   ------------------------
+   Suppose network failure splits our system into 2 isolated partitions.
+   Than our system continues to operate.
+
+                                Service-1                   Service-2
+                                    |                           |
+                                ---------                   ---------
+                                |       |                   |       |                      
+                                |   DB  |    ---❌❌--     |   DB  |
+                                |       |                   |       |
+                                ---------                   ---------  
+                              Partition 1                   Partition 2
+
+    But we need to choose either consistency or Availability.
+    If you choose -
+    -------------
+    A. Consistency : If you want consistency just Reject Request.
+                     (Because Nodes are not communicating they are separated).
+                     If we write in Service-1 than Service-2 will become inconsistent.
+
+    B. Availability: If you want availability just accept Request. 
+                     But both services will become inconsistent.
+                     (Because Nodes are not communicating they are separated).
+
+    If You choose "Consistency"  => you will become Unavailable.
+    If You choose "Availability" => you will become InConsistent.
 -->
