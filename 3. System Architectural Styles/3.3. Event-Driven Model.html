@@ -18,4 +18,34 @@ Workflow:
 3. Subscribers listen to the event – Multiple services can consume the event and take independent actions.
 
 Note : Services react asynchronously – Services process the event without blocking each other.
+
+
+Main Advantage of EVent-Driven Model :
+------------------------------------
+1. ✅ Great "Consistency" :
+   When any service gets event from event Bus it save this event in its own DB.
+   So we are saving our data + incoming event data of other service.
+   SO suppose any damage happen to sender service we don't care about it.
+   Or Any change happen in sender service DB we don't care about it.
+
+2. ✅ Decoupled & Scalable :
+   Services don’t depend on each other directly.
+
+3. ✅ Event Replay & History :
+   Events can be stored and replayed if needed.
+
+4. ✅ Highly Responsive – Services react instantly to events.
+5. ✅ Transaction Guaranteed : Either 0/1
+
+
+Disadvantages:
+--------------
+1. ❌ Event Ordering Complexity – Handling event sequence across services can be tricky.
+2. ❌ Difficult Debugging – Hard to track event flow when multiple services are involved.
+3. ❌ Too much resource consumption – Requires an event bus, queue, handlers, High CPU usage and event processing logic.
+4. ❌ latency - Decoupled nature of event-driven system means that there is multiple layer of communication
+                which can introduce latency.
+5. ❌ If we want to restrict some service to consume evevnts - Than we need another level of implementation for restiction
+                                                                It's difficult.  
+   
 -->
