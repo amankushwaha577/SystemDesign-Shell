@@ -2,13 +2,20 @@
 In a Message-Driven Model, each message is processed by only one consumer, whereas in a Publish-Subscribe (Pub/Sub) Model,
 multiple consumers receive the same message.
 
-Flow :
+🔹 Message-Driven Model (Single Consumer Per Message) :
+--------------------------------------------------------
 📤 Producer (Order Service) → Message Queue → One Consumer (Payment Service) 📥
--------------------------------------------------------------------------------
-a. A message queue (MQ) ensures that each message is delivered to only one consumer.
-b. Once a consumer processes the message, it is removed from the queue.
-Example:
-An order processing system where only one payment service processes each order.
+    a. A message queue (Kafka, RabbitMQ, AWS SQS) ensures that each message is delivered to only one consumer.
+    b. Once a consumer processes the message, it is removed from the queue.
+    Example:
+    An order processing system where only one payment service processes each order.
+
+🔹 Pub/Sub Model (Multiple Consumers Per Message) :
+---------------------------------------------------
+    a. A message broker (Kafka, RabbitMQ, Google Pub/Sub, Redis Pub/Sub) delivers a copy of the same message to multiple subscribers.
+    b. Each subscriber gets an independent copy and processes it separately.
+    Example:
+    A user registration event where multiple services (email service, analytics service, notification service) need to act on the same event.
 
 
 🔹 How It Works :
