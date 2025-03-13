@@ -28,12 +28,18 @@ In Consistent Hashing we hashes both request and server with same hashing functi
   (29)s4🔴                  \              \
       /                   🔴 s2 (10)        |
       |                     |                | -> Clockwise Direction  Mapping
- r3 🔵                     🔵  r3
+ r3 🔵                     🔵 r4
       \                     |
        \                   /
          \               /
       s3 🔴───────────🔴 s1 (23)   || Consistent Hashing Ring
      (25)
 
-     Every Request will take its nearest server in clockwise direction for load balancing.
+    Step 3: Every Request will take its nearest server in clockwise direction for load balancing.
+            r0, r1, r2 -> s2 🔴
+            r4         -> s1 🔴
+            r3         -> s4 🔴
+
+     There is no load on s3 🔴
+
 -->
