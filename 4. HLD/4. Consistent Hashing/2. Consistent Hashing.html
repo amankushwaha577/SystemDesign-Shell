@@ -10,19 +10,17 @@ In Consistent Hashing we hashes both request and server with same hashing functi
 <!--
     let M= 30 (Size of Ring)
 
-    Step 1: Map Severs on Ring :
+    Step 1: Map Severs on Ring using Same Hash Function :
     🟠 server 0  s0  | Id- 0  =>  Server_Index = hash(s1) % 30 =  hash(0) % 30  = 49 % 30  =>  23
     🟠 server 1  s1  | Id- 1  =>  Server_Index = hash(s2) % 30 =  hash(1) % 30  = 67 % 30  =>  10
     🟠 server 2  s2  | Id- 2  =>  Server_Index = hash(s3) % 30 =  hash(2) % 30  = 72 % 30  =>  25
     🟠 server 3  s3  | Id- 3  =>  Server_Index = hash(s3) % 30 =  hash(3) % 30  = 12 % 30  =>  29
 
-    Step 2: Map Requests on Ring :
+    Step 2: Map Requests on Ring using Same Hash Function:
     🔵 Request 0  r0  | Id- 0  =>  Request_Index = hash(r0) % 30 =  hash(0) % 30  = 0 % 30  =>  0
     🔵 Request 1  r1  | Id- 1  =>  Request_Index = hash(r1) % 30 =  hash(1) % 30  = 1 % 30  =>  1 
     🔵 Request 2  r2  | Id- 2  =>  Request_Index = hash(r2) % 30 =  hash(2) % 30  = 2 % 30  =>  2 
     🔵 Request 3  r3  | Id-26  =>  Request_Index = hash(r2) % 30 =  hash(26) % 30 = 26 % 30 =>  26
-
-    Consistent Hashing Ring
 
         r0       r1
          🔵──────🔵───🔵 r2  
@@ -34,7 +32,7 @@ In Consistent Hashing we hashes both request and server with same hashing functi
       \                     |
        \                   /
          \               /
-      s3 🔴───────────🔴 s1 (23)
+      s3 🔴───────────🔴 s1 (23)   || Consistent Hashing Ring
      (25)
 
 -->
