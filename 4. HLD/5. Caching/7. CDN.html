@@ -1,0 +1,71 @@
+<!-- 
+What is a CDN (Content Delivery Network)? :
+--------------------------------------------
+A CDN (Content Delivery Network) is a network of distributed servers that cache and deliver content 
+(such as images, videos, scripts, and web pages) from locations closer to users, reducing latency and improving load times. 
+
+CDN : Cloudflare, AWS CloudFront, Akamai, and Fastly.
+
+How a CDN Works :
+-----------------
+Client  →  Browser Cache (✅) → Serve Response  
+           ⬇
+           ⬇ (Cache Miss)  
+           ⬇
+          DNS  →  CDN (✅) → Serve Response  
+           ⬇
+           ⬇ (Cache Miss)  
+           ⬇
+          API Gateway  →  Load Balancer  →  Service 
+           ⬇ 
+           ⬇ (Check Cache)  
+           ⬇
+          Redis (✅) → Serve Response 
+           ⬇ 
+           ⬇ (Cache Miss)  
+           ⬇
+          Database → Store in Cache → Serve Response  
+
+1️⃣ Client Requests Data
+        The browser first checks its local cache.
+        ✅ If cached, the response is served immediately.
+        ❌ If not cached, the request continues.
+
+2️⃣ DNS Resolves the Domain
+         DNS converts the domain name to an IP address.
+
+3️⃣ CDN (Content Delivery Network) Checks for Cached Response
+        ✅ If cached, the CDN serves the response without hitting the backend.
+        ❌ If not cached, the request moves to the backend.
+        
+4️⃣ API Gateway Processes the Request
+        The request reaches the API Gateway, which handles authentication, rate limiting, and routing.
+
+5️⃣ Load Balancer Distributes the Request
+        The Load Balancer sends the request to the appropriate backend service.
+
+6️⃣ Service Checks Redis Cache for Data
+        ✅ If the data exists in Redis, the response is served from cache.
+        ❌ If not found in Redis, the request moves to the database.
+
+7️⃣ Database Query for Data
+        The database retrieves the requested data.
+        The data is stored in Redis for future requests.
+        The final response is sent back to the client.
+
+
+Benefits of Using a CDN :
+------------------------
+✅ Faster Load Times – Content loads quickly from a nearby server.
+✅ Reduced Server Load – Fewer requests reach the main server.
+✅ Better Scalability – Can handle high traffic easily.
+✅ DDoS Protection – CDN absorbs malicious traffic.
+✅ Lower Bandwidth Costs – Cached content reduces origin server data transfer.
+
+
+Disadvantages of CDN :
+----------------------
+❌ Cost – Premium CDNs charge for traffic and storage.
+❌ Cache Invalidation Issues – Updates may not reflect immediately.
+❌ Regional Availability – Some regions may not have CDN nodes.
+-->
