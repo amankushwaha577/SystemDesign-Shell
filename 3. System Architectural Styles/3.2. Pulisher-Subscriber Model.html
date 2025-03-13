@@ -10,6 +10,7 @@ Note : The publisher and subscriber do not directly communicate with each other,
 
 How the Pub/Sub Model Works (Step-by-Step):
 -----------------------------------------
+
 a. Publisher Sends Messages :
    A publisher publishes a message to a "topic" in a message broker (e.g., Kafka, RabbitMQ, Google Pub/Sub, Redis Pub/Sub).
    The message broker acts as an intermediary.
@@ -21,6 +22,45 @@ b. Message Broker Distributes Messages :
 c. Subscribers Receive Messages
    Any service (subscriber) that has subscribed to the topic receives the message.
    Multiple subscribers can receive the same message.
+
+
+                                       ┌──────────────┐
+                                       │  Publisher   │
+                                       └──────┬───────┘
+                                             │
+                                       (1) Publishes Message
+                                             │
+                                             ▼
+                                    ┌──────────────────┐
+                                    │   Message Broker │  (e.g., Kafka, RabbitMQ)
+                                    └──────┬───────────┘
+                                          │
+                                    (2) Distributes Message to Subscribers
+                                          │
+                                 ┌────────┴────────┐
+                                 │                 │
+                              ┌──▼──┐         ┌────▼────┐
+                              │Sub 1│🗂️      │  Sub 2  │🗂️  <-- Acts as a Publisher
+                              └─────┘         └────┬────┘
+                                                   │
+                                          (3) Publishes to Another Broker
+                                                   │
+                                                   ▼
+                                    ┌──────────────────┐
+                                    │  Message Broker 2 │  (e.g., Another Kafka/RabbitMQ instance)
+                                    └──────┬───────────┘
+                                          │
+                                    (4) Distributes Message to More Subscribers
+                                          │
+                                 ┌────────┴────────┐
+                                 │                 │
+                              ┌──▼──┐🗂️       ┌────▼────┐🗂️ <- DB
+                              │Sub 3│         │  Sub 4  │
+                              └─────┘         └────────┘
+                              (5) Processes the Message
+
+
+
 
 Advantages:
 ✅ 1. Decoupling              – Publishers and subscribers don’t know about each other.
@@ -37,5 +77,5 @@ Disadvantages:
 Best Use Cases:
 1. Real-time notifications.
 2. Log processing and monitoring.
-3.Distributed systems with independent services.
+3. Distributed systems with independent services.
 -->
