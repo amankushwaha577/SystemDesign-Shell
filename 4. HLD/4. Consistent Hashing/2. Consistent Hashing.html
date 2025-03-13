@@ -102,4 +102,51 @@ Advantage Of Consistent Hashing :
       -----------------------
       Load on Server s1 = r1, r2, r4
       here half of load of sytem is on Server S1
+
+
+Solution :
+----------
+  In consistent hashing with virtual nodes, each physical server is mapped to multiple virtual nodes to improve load balancing. 
+  This ensures that when a server is added or removed, the distribution of request remains more unaffected.
+
+
+    🟪 server 0 (s0) → Virtual Nodes: v0-1, v0-2, v0-3
+    🔵 server 1 (s1) → Virtual Nodes: v1-1, v1-2, v1-3
+    🟣 server 2 (s2) → Virtual Nodes: v2-1, v2-2, v2-3
+    🟠 server 3 (s3) → Virtual Nodes: v3-1, v3-2, v3-3
+
+    Consistent Hashing Ring with Virtual Nodes
+
+                    🔵 r0
+            v0-1 🟪───────🔴 v1-1
+            /                  \
+            /                    \
+    v3-2 🟠                      🔴 v1-2
+        |                          |
+   🔵r0|                           | 🔵 r2
+        |                          |
+    v2-1 🟣                      🔴 v1-3
+            \                      /
+            \                    /
+            v2-2 🟣───────🟠 v3-1
+                    🔵r3
+
+    Explanation:
+    - Each server is represented by multiple virtual nodes.
+    - This helps distribute keys more evenly.
+    - If a server fails or is removed, the impact is minimized as its virtual nodes are spread across the ring.
+
+    Key mappings:
+    r0 → v3-2
+    r0 → v1-1
+    r2 → v1-3
+    r3 → v2-2
+
+
+Note: When a physical server (real machine) goes down, all of its virtual nodes (vNodes) also disappear from the ring. 
+----  However, since virtual nodes are evenly distributed across the ring, the impact is still smaller compared to traditional consistent hashing.
+
+      This means:
+      Instead of losing all keys mapped to a single physical server, the keys get redistributed to the remaining virtual nodes of other servers.
+      The system remains more balanced because other virtual nodes from different servers are still present in the ring.
 -->
