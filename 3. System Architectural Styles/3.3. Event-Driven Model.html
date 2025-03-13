@@ -10,8 +10,9 @@ Note : The sender and receiver service do not directly communicate with each oth
        they don't know about each other,
        making the system loosely coupled and scalable.
 
-Workflow:
---------
+How the Event-Driven Model Works (Step-by-Step):
+-----------------------------------------
+
 1. An event occurs : A user action, system change, or an external trigger (e.g., "Order Placed").
                      The event is sent to an Event Bus.
 2. Event Bus (Kafka / RabbitMQ / AWS EventBridge) receives the event.
