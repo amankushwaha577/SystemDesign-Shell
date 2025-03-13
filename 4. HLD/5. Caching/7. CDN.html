@@ -6,6 +6,24 @@ A CDN (Content Delivery Network) is a network of distributed servers that cache 
 
 CDN : Cloudflare, AWS CloudFront, Akamai, and Fastly.
 
+
+    +---------------------+
+    |       User         |
+    +---------------------+
+              |
+              v
+    +---------------------+      +---------------------+
+    |  Nearest Edge CDN  |       |  Other   Edge CDN  |
+    |       Server       |       |       Server       |
+    +---------------------+      +---------------------+
+              |                    |
+              v                    /
+    +----------------------+ <----/
+    |   Origin Server      |
+    | (Main Web Server)    |
+    +----------------------+
+
+
 How a CDN Works :
 -----------------
 Client  →  Browser Cache (✅) → Serve Response  
