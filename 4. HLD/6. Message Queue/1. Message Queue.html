@@ -1,0 +1,42 @@
+<!-- 
+What is a Message Queue? ::
+---------------------------
+A Message Queue (MQ) is a form of asynchronous service-to-service communication that allows 
+messages to be sent between different parts of a system without them being directly connected. 
+
+By separating message producers (senders) and consumers (receivers), message queues provide 
+a. scalability, 
+b. fault tolerance, 
+c. and load balancing.
+
+
+Why Use a Message Queue?
+-------------------------
+1. Asynchronous Processing: Enables background processing without blocking the main application flow.
+2. Decoupling: Producers and consumers do not need to interact directly.
+3. Scalability: Enables load balancing by distributing messages across multiple consumers.
+4. Fault Tolerance & Reliability: Ensures messages are not lost due to system failures.
+
+
+
+Key Components:
+---------------
+1. Producer: Generates and sends messages to the queue.
+2. Queue: Stores messages temporarily until they are processed.
+3, Consumer: Retrieves and processes messages from the queue.
+4. Broker(Optional): Manages the communication between producers and consumers (e.g., RabbitMQ, Kafka, AWS SQS).
+
+Note :
+Acknowledgment (Optional): In some message queue systems, consumers can send acknowledgments back to the queue, 
+indicating that they have successfully processed a message. 
+This is essential for ensuring message delivery and preventing message loss.
+
+
+
+Message Queue Patterns :
+-----------------------
+1. Point-to-Point (P2P): A single consumer processes each message.
+2. Publish-Subscribe (Pub-Sub): Multiple consumers receive the same message.
+3. Work Queue: Distributes messages among multiple consumers for parallel processing.
+4. Delayed Message Queue: Messages are processed after a specified delay.
+-->
