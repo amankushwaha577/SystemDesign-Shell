@@ -1,0 +1,57 @@
+<!-- 
+Consistent Hashing is a technique used in distributed systems to achieve load balancing.
+while minimizing rehashing when nodes are added or removed. 
+
+It is widely used in distributed caching, distributed databases and load balancing. 
+
+
+Why is Consistent Hashing Needed?
+---------------------------------
+In a traditional modulo-based hashing system for Load Balancing:
+
+    If there are N servers, a key (request) is assigned to a server using:
+    [ server_index where request will go = hash(key) % N ]
+
+When a server is added or removed, almost all keys need to be remapped, causing high overhead.
+Consistent Hashing solves this problem by minimizing remapping when the number of servers changes.
+
+Example :
+ let r1 => 10     let N = 4 (Total Number of Servers)
+     r2 => 20     r1,r2,r3 = Incoming Request on System
+     r3 => 30
+
+     Sever_Index  for r1 = hash(r1) % 4 =  hash(10) % 4  = 3 % 4  =>  3
+     Sever_Index  for r2 = hash(r2) % 4 =  hash(20) % 4  = 15 % 4  => 3
+     Sever_Index  for r3 = hash(r3) % 4 =  hash(30) % 4  = 20 % 4  => 0
+
+     r3  ------------ > |🗄️ Server 0 |
+
+                        |🗄️ Server 1 |
+
+                        |🗄️ Server 2 |
+
+     r1, r2 --------- > |🗄️ Server 3 |
+
+Suppose our server become famous we introduced a new server for handeling more load.
+Now N = 5   
+
+     Sever_Index  for r1 = hash(r1) % 4 =  hash(10) % 5  = 3 % 5  =>  3
+     Sever_Index  for r2 = hash(r2) % 4 =  hash(20) % 5  = 15 % 5  => 0
+     Sever_Index  for r3 = hash(r3) % 4 =  hash(30) % 5  = 20 % 5  => 2
+
+     r2  ----------- >  |🗄️ Server 0 |
+
+                        |🗄️ Server 1 |
+
+     r3 ------------ >  |🗄️ Server 2 |
+
+     r1 -- --------- >  |🗄️ Server 3 |
+
+                        |🗄️ Server 4 |
+
+    OBSERVE : Now because of this normal hashing policy entire system has changed.
+              r3, r2 unncessarily changed its server.
+              Entire cache in sever is useless now.
+              Server 0 have cache of r3 ie. Useless now.
+              Server 3 have cache of r2 ie. Useless now.
+-->
