@@ -109,6 +109,10 @@ Solution :
   In consistent hashing with virtual nodes, each physical server is mapped to multiple virtual nodes to improve load balancing. 
   This ensures that when a server is added or removed, the distribution of request remains more unaffected.
 
+  How to Achieve Virtual Servers :
+  If you want 3 virtual server use 3 different hash functions, they will give 3 different indexes on Ring.
+  If you want 9 virtual server use 9 different hash functions, they will give 9 different indexes on Ring.
+
 
     🟪 server 0 (s0) → Virtual Nodes: v0-1, v0-2, v0-3
     🔵 server 1 (s1) → Virtual Nodes: v1-1, v1-2, v1-3
@@ -117,7 +121,7 @@ Solution :
 
     Consistent Hashing Ring with Virtual Nodes
 
-                    🔵 r0
+                    🔵 r1
             v0-1 🟪───────🔴 v1-1
             /                  \
             /                    \
@@ -132,13 +136,13 @@ Solution :
                     🔵r3
 
     Explanation:
-    - Each server is represented by multiple virtual nodes.
-    - This helps distribute keys more evenly.
-    - If a server fails or is removed, the impact is minimized as its virtual nodes are spread across the ring.
+    a. Each server is represented by multiple virtual nodes.
+    b. This helps distribute keys more evenly.
+    c. If a server fails or is removed, the impact is minimized as other server's virtual nodes are spread across the ring.
 
     Key mappings:
     r0 → v3-2
-    r0 → v1-1
+    r1 → v1-1
     r2 → v1-3
     r3 → v2-2
 
