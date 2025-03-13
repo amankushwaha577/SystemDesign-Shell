@@ -1,0 +1,45 @@
+<!-- 
+Disadvantages Of Using cache :
+
+1. Extra Latency for Cache Lookup : Though cache speeds up retrieval, it adds a small overhead.
+   - Example: Suppose data is not available in Cache, Server still needs to check cache first, which adds a few milliseconds.
+
+     +---------+        100ms        +---------+        10ms          +------+
+     | Client  | --------- ------- > | Server  | --------------- -- > |  DB  |
+     +---------+                     +---------+                       +------+
+                                         |
+                                         | 1ms
+                                         v
+                                      +------+
+                                      |Cache |
+                                      +------+
+
+    Total Time =     100 * 2 +          1 * 2 +       10 * 2 +       = 222ms
+                   Server Req/Res   Cache Req/Res  Cache Req/Res
+                                         ||
+                                         ||
+                                          ------- > Even data is not available in cache but it is still cheched. 
+
+2. Stale Data : Cached data might be outdated if not refreshed properly.
+   - If data is updated in the DB, but cache is not refreshed, users get old data.
+   - Extra logic is needed to keep cache in sync with the database.
+
+3. Memory Overhead : Storing cached data consumes extra memory.
+   - More memory is required to store frequently used data.
+   - Expensive servers might be needed for large-scale caching.
+
+4. Cache Invalidation Complexity : Deciding when to remove or refresh cache is difficult.
+   - Common strategies: TTL (Time-to-Live), LRU (Least Recently Used).
+   - Improper invalidation can lead to inconsistent data.
+
+5. Cold Start Problem : Initial requests might be slow if cache is empty.
+   - The first request always goes to the DB since cache is not populated yet.
+   - If cache is frequently flushed, cold starts become common.
+
+6. Security Issues : Cached sensitive data may be exposed.
+   - If not secured, attackers can access cached user details or session data.
+
+7. Replication and Consistency : Distributed caching adds complexity.
+   - Multiple caches in different locations need to sync.
+   - If not handled properly, users might see inconsistent results.
+-->
