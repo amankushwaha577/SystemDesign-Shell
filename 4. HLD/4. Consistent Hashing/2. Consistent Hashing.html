@@ -5,6 +5,15 @@ In Consistent Hashing we hashes both request and server with same hashing functi
 
     M = we use a circular hash space (0 to 2³² - 1)
     Hash function = SHA-1, MurmurHash.
+
+How Does Load Balancing Work in Consistent Hashing?
+---------------------------------------------------
+1️⃣ Each server has multiple virtual nodes.
+2️⃣ Requests are mapped to virtual nodes instead of physical servers
+3️⃣ If a server fails, its virtual nodes disappear, and keys are reassigned to the next available nodes.
+
+🔹 Without virtual nodes – Some servers might get too many requests, causing an imbalance.
+🔹 With virtual nodes – The load is more evenly distributed across all servers.
 -->
 
 <!--
