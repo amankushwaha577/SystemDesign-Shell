@@ -19,6 +19,42 @@ Workflow:
 
 Note : Services react asynchronously – Services process the event without blocking each other.
 
+                              ┌──────────────┐
+                              │  Event Source │  (User Action, Sensor, API)
+                              └──────┬───────┘
+                                    │
+                              (1) Generates Event  
+                                    │
+                                    ▼
+                           ┌──────────────────┐
+                           │   Event Broker   │  (Kafka, RabbitMQ, Redis Streams)
+                           └──────┬───────────┘
+                                 │
+                           (2) Routes Event to Consumers
+                                 │
+                        ┌────────┴────────┐
+                        │                 │
+                     ┌──▼──┐🗂️+📚   ┌────▼────┐🗂️+📚  
+                     │Svc 1│         │  Svc 2  │    <-- Acts as an Event Producer
+                     └─────┘         └────┬────┘
+                                          │
+                                 (3) Produces New Event
+                                          │
+                                          ▼
+                           ┌──────────────────┐
+                           │  Event Broker 2  │  (Chained Event Processing)
+                           └──────┬───────────┘
+                                 │
+                           (4) Routes to More Consumers
+                                 │
+                        ┌────────┴────────┐
+                        │                 │
+                     ┌──▼──┐🗂️+📚   ┌────▼────┐🗂️+📚 <------ 🗂️ (Data of Service) + 📚 ( Data of Event ) 
+                     │Svc 3│         │  Svc 4  │       So we are saving data of own + data coming from another service
+                     └─────┘         └────────┘
+                     (5) Processes Event and Stores Data
+
+
 
 Main Advantage of EVent-Driven Model :
 ------------------------------------
