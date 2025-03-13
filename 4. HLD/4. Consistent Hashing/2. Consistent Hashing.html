@@ -153,4 +153,32 @@ Note: When a physical server (real machine) goes down, all of its virtual nodes 
       This means:
       Instead of losing all keys mapped to a single physical server, the keys get redistributed to the remaining virtual nodes of other servers.
       The system remains more balanced because other virtual nodes from different servers are still present in the ring.
+
+
+Benefits of Virtual Nodes
+✅ Better load balancing – keys are distributed more evenly.
+✅ Less disruption when a node joins or leaves the system.
+✅ Improved fault tolerance – virtual nodes reduce the impact of a failed server.
+-->
+
+
+
+<!-- 
+Applications of Consistent Hashing :
+-----------------------------------
+1. Distributed Caching (Memcached, Redis Cluster)
+2. Load Balancing (NGINX, HAProxy)
+3. Sharding in Databases (Amazon DynamoDB, Cassandra)
+4. Content Delivery Networks (CDN)
+
+Pros and Cons :
+----------------
+✅ Advantages
+a. Minimal data movement when nodes are added/removed.
+b. Load balancing (especially with virtual nodes).
+c. Efficient scaling for distributed systems.
+
+❌ Disadvantages
+a. Slight lookup overhead (requires sorted data structures).
+b. Hash function performance affects efficiency.
 -->
