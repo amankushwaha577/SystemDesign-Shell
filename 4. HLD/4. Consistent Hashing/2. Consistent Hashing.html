@@ -23,11 +23,11 @@ In Consistent Hashing we hashes both request and server with same hashing functi
     🔵 Request 3  r3  | Id-26  =>  Request_Index = hash(r2) % 30 =  hash(26) % 30 = 26 % 30 =>  26
 
         r0       r1
-         🔵──────🔵───🔵 r2  
-         /                \
-  (29)s4🔴                  \
-      /                   🔴 s2 (10)
-      |                     |
+         🔵──────🔵───🔵 r2          ---
+         /                \               \
+  (29)s4🔴                  \              \
+      /                   🔴 s2 (10)        |
+      |                     |                | -> Clockwise Direction  Mapping
  r3 🔵                     🔵  r3
       \                     |
        \                   /
