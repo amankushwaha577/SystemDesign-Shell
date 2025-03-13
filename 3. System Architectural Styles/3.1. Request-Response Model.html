@@ -9,6 +9,7 @@ a. Client sends a request (e.g., HTTP request, API call).
 b. Server processes the request and sends back a response.
 c. Client waits for the response before proceeding.
 
+
 Example:
 1. REST APIs (e.g., GET /users/123 → returns user details).
 2. gRPC (Remote Procedure Calls).
@@ -30,4 +31,39 @@ Best Use Cases:
 1. Traditional web applications.
 2. Fetching data from APIs.
 3. Synchronous services requiring immediate results. 
+-->
+
+
+<!-- 
+                                ┌──────────────┐
+                                │    Client    │  (Browser, Mobile App)
+                                └──────┬───────┘
+                                        │
+                                (1) Sends Request
+                                        │
+                                        ▼
+                            ┌──────────────────┐
+                            │     Server       │  (Backend API, Web Server)
+                            └──────┬───────────┘
+                                        │
+                               (2) Processes Request
+                                        │
+                                        ▼
+                            ┌──────────────────┐
+                            │    Database      │  (SQL / NoSQL)           => Synchronous Request + Response
+                            └──────────────────┘
+                                        │
+                            (3) Retrieves Data
+                                        │
+                                        ▼
+                            ┌──────────────────┐
+                            │     Server       │  (Formats Response)
+                            └──────┬───────────┘
+                                        │
+                            (4) Sends Response
+                                        │
+                                        ▼
+                                ┌──────────────┐
+                                │    Client    │  (Renders Response)
+                                └──────────────┘
 -->

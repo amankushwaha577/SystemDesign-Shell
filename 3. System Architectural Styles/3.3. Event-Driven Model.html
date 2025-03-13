@@ -15,7 +15,7 @@ How the Event-Driven Model Works (Step-by-Step):
 
 1. An event occurs : A user action, system change, or an external trigger (e.g., "Order Placed").
                      The event is sent to an Event Bus.
-2. Event Bus (Kafka / RabbitMQ / AWS EventBridge) receives the event.
+2. Event Bus (Kafka / RabbitMQ / AWS EventBridge) receives the event &  routes the event to appropriate subscribers..
 3. Subscribers listen to the event – Multiple services can consume the event and take independent actions.
 
 Note : Services react asynchronously – Services process the event without blocking each other.
