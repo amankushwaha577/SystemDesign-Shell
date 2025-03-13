@@ -42,4 +42,58 @@ In Consistent Hashing we hashes both request and server with same hashing functi
 
      There is no load on s3 🔴
 
+
+Advantage Of Consistent Hashing :
+--------------------------------
+1. With simple hashing, when a new server is added, almost all the requests need to be remapped.
+   With consistent hashing, adding a new server only requires redistribution of a fraction of the requests.
+
+   Suppose a new server s5 is added.
+   The new server will take responsibility for some keys from its successor server, reducing load imbalance.
+
+        r0     s5   r1
+         🔵───🔴──🔵───🔵 r2         
+         /                \               
+  (29)s4🔴                  \              
+      /                   🔴 s2 (10)        
+      |                     |               
+ r3 🔵                     🔵 r4
+      \                     |
+       \                   /
+         \               /
+      s3 🔴───────────🔴 s1 (23)   
+     (25)
+
+            r0         -> s5 🔴  ( New Request alignment)
+
+            --  r1, r2 -> s2 🔴  ( Unaffected : Request alignment)
+            r4         -> s1 🔴  ( Unaffected : Request alignment)
+            r3         -> s4 🔴  ( Unaffected : Request alignment)
+      There is no load on s3 🔴  ( Unaffected : Request alignment)
+
+           
+            
+      
+
+2. If a node fails, its keys are reassigned to the next available node, reducing rehashing to only a fraction of the keys.
+
+        r0     s5   r1
+         🔵───🔴──🔵───🔵 r2         
+         /                \               
+  (29)s4🔴                  \              
+      /                     ❌ ------------------- > 🔴 s2 (10)  Failed Server  
+      |                     |               
+ r3 🔵                     🔵 r4
+      \                     |
+       \                   /
+         \               /
+      s3 🔴───────────🔴 s1 (23)   
+     (25)
+
+            r1, r2     -> s1 🔴  ( New Request alignment)
+            r4         -> s1 🔴  ( Unaffected : Request alignment)
+
+            r3         -> s4 🔴  ( Unaffected : Request alignment)
+            r0         -> s5 🔴  ( Unaffected : Request alignment)
+      There is no load on s3 🔴  ( Unaffected : Request alignment)
 -->
