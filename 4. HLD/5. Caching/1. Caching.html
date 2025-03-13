@@ -1,0 +1,51 @@
+<!-- 
+Caching is a technique used to store frequently accessed data in a fast-access layer (like memory)
+to reduce latency, improve response times, and lower the load on the backend systems (like databases or APIs). 
+
+Why Use Caching? :
+------------------
+✅ Reduces Latency – Accessing data from cache (RAM) is much faster than fetching from a database or disk.
+✅ Improves Performance – Reduces repeated expensive computations or database queries.
+✅ Reduces Load on Databases – Minimizes repeated reads, improving overall system efficiency.
+✅ Optimizes Cost – Reduces the need for frequent API or database calls, saving compute and storage resources.
+
+
+-->
+
+
+<!--
+     +---------+        100ms        +---------+        10ms        +------+
+     | Client  | ---------------- -> | Server  | ----------------- > |  DB  |
+     +---------+                    +---------+                    +------+
+                                         |
+                                         | 1ms
+                                         v
+                                      +------+
+                                      |Cache |
+                                      +------+
+
+Time Calculation:
+
+1. Without Cache:
+   - Client → Server = 100ms
+   - Server → DB = 10ms
+   - Server → Client = 100ms (assumed same as request)
+   - DB → Server = 10ms (assumed same as request)
+   - Total Time =     100 +      10  +    100 +      10   = 220ms
+                   Server Req   DB Req  Server Res  DB Res
+
+2. With Cache:
+   - Client → Server = 100ms
+   - Server → Cache = 1ms
+   - Server → Client = 100ms
+   - Cache → Server = 1ms
+   - Total Time =     100 +        1 +       100 +       1      = 202ms
+                   Server Req   Cache Req  Server Res  Cache Res
+
+
+Caching reduces the response time from 400ms to 202ms!
+Almost 10% Saving through Cache.
+
+Suppose we are using Instagram where all the Noida people getting same feed. So instead of interacting with direct server
+instagram get the data from cache Points.
+-->
