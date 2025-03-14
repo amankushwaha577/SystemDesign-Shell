@@ -1,7 +1,6 @@
 <!--  
-Types of Sharding 🚀  
-
-Sharding can be implemented in different ways depending on how data is distributed across shards. The most common types of sharding are:  
+Types of Sharding : Sharding can be implemented in different ways depending on how data is distributed across shards. 
+                    The most common types of sharding are:  
 
 1. Horizontal Sharding (Scaling) :
 ---------------------------------
@@ -143,21 +142,13 @@ shard_id = hash(user_id) % total_shards
 ❌ Cons:  
 - The lookup table is a single point of failure if not replicated properly.  
 - Adds an extra lookup step for each query, increasing latency.  
+-->
 
-Comparison of Sharding Types  
 
-| Sharding Type       | Pros | Cons | Best For |  
-|---------------------|------|------|----------|  
-| Range-Based        | Simple, good for range queries | Hotspots if data is unevenly distributed | Ordered datasets (e.g., time-series data) |  
-| Vertical           | Optimized storage for different data types | Limited scalability, complex joins | Multi-feature applications (e.g., social networks) |  
-| Hash-Based         | Even load distribution, no hotspots | Hard to do range queries, costly resharding | Large-scale applications (e.g., e-commerce, social media) |  
-| Directory-Based    | Flexible, easy to add shards | Extra lookup overhead, risk of failure | Dynamic scaling environments |  
-
+<!--
 Which Sharding Type Should You Use?  
 ✅ Use Range-Based Sharding if you need efficient range queries and sequential data access.  
 ✅ Use Vertical Sharding if your data is naturally divided into separate features (e.g., user profiles vs. transactions).  
 ✅ Use Hash-Based Sharding if you want even load distribution and random access patterns.  
 ✅ Use Directory-Based Sharding if your system needs dynamic scalability with flexible shard management.  
-
-Would you like an example implementation in MongoDB, MySQL, or PostgreSQL? 🚀  
 -->
