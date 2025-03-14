@@ -17,6 +17,8 @@ d. Replication Factor → Number of copies of data stored in the cluster.
 e. Partitioning → Data is distributed across nodes based on a partition key.
 f. Gossip Protocol → Nodes communicate with each other to share health status.
 
+Note: These nodes are made up from Sharding.
+
 Cassandra Cluster Architecture (Ring Topology) :
 -----------------------------------------------
 
@@ -83,39 +85,41 @@ d. Streaming & Logging (time-series data, event tracking).
 
 
 <!--
-How Cassandra Works (Simple Explanation)
+How Cassandra Works (Simple Explanation) :
 
 1️⃣ Data Distribution (Ring Topology)  
 ------------------------------------
-📚 How does Cassandra store data?  
-- Instead of one big bookshelf, books (data) are split across multiple bookshelves (nodes).  
-- Each book is placed in a specific bookshelf using a partition key (like a unique label).  
-- The consistent hashing algorithm ensures data is spread evenly across bookshelves.  
+    📚 How does Cassandra store data?  
+    a. Instead of one big bookshelf, books (data) are split across multiple bookshelves (nodes).  
+    b. Each book is placed in a specific bookshelf using a partition key (like a unique label).  
+    c. The consistent hashing algorithm ensures data is spread evenly across bookshelves.  
 
 ✅ No single librarian is in charge— all work together!  
 
+
 2️⃣ Replication (Making Backup Copies)  
 --------------------------------------
-📑 What happens if one bookshelf is lost?  
-- Cassandra creates multiple copies (replicas) of each book and places them on different bookshelves.  
-- The Replication Factor (RF) decides how many copies exist.  
+    📑 What happens if one bookshelf is lost?  
+    a. Cassandra creates multiple copies (replicas) of each book and places them on different bookshelves.  
+    b. The Replication Factor (RF) decides how many copies exist.  
 
-Example:  
-If RF = 3, each book is stored in three different bookshelves (nodes).  
+    Example:  
+    If RF = 3, each book is stored in three different bookshelves (nodes).  
 
-✅ If one shelf (node) is lost, the book can still be found!  
+✅ If one shelf (node) is lost, the book can still be found in another shelf!  
+
 
 3️⃣ Read & Write Operations (Fast & Reliable)  
 ----------------------------------------------
-📝 How do you write data?  
-1. Data is first written in a commit log (safety backup).  
-2. Then, it is added to memtable (fast memory storage).  
-3. Later, data is saved permanently in SSTables (disk storage).  
+    📝 How do you write data?  
+    a. Data is first written in a commit log (safety backup).  
+    b. Then, it is added to memtable (fast memory storage).  
+    c. Later, data is saved permanently in SSTables (disk storage).  
 
-🔍 How do you read data?  
-- Cassandra quickly checks the memtable (if data is fresh).  
-- If not, it looks into SSTables (disk).  
-- Bloom filters help speed up searching.  
+    🔍 How do you read data?  
+    a. Cassandra quickly checks the memtable (if data is fresh).  
+    b. If not, it looks into SSTables (disk).  
+    c. Bloom filters help speed up searching.  
 
 ✅ Fast writes & reads without slowing down!  
 
