@@ -21,17 +21,27 @@ Best Practices for Implementing Sharding :
 
 6. When to Use Sharding? :
 ---------------------------
-1. Handling Large User Bases: Social media platforms, SaaS applications.
-2. High-Volume Transaction Systems: Payment gateways, e-commerce.
-3, Big Data & Analytics: Distributed log processing, machine learning workloads.
+1. If your database is growing beyond the capacity of a single server.
+2. If you need high write throughput and low query latency.
+3. If your application serves a global audience and you want to distribute data geographically.
+4. If your system needs to scale dynamically with user growth.
 
 
 Why Use Sharding? :
 ------------------
-1. Scalability: Distributes data and load across multiple servers, enabling the system to handle more data and traffic.
-2. Performance: Reduces query latency by limiting the amount of data each server needs to process.
-3. High Availability & Fault Tolerance: Failure in one shard does not impact the entire system.
-4. Cost Efficiency: Allows the use of smaller, cheaper servers instead of a single large, expensive machine.
+1. Scalability: 
+        a. Distributes data and load across multiple servers, enabling the system to handle more data and traffic.
+2. Performance: 
+        a. Reduces query latency by limiting the amount of data each server needs to process.
+        b. because one shard may have 1/10 amount of total data which gives low latency for querying.
+3. High Availability & Fault Tolerance: 
+        a. Failure in one shard does not impact the entire system.
+        b. Replication within each shard can further improve availability.
+4. Cost Efficiency: 
+        a. Allows the use of smaller, cheaper servers instead of a single large, expensive machine.
+5. Geo-Distribution :
+        a. Data can be placed closer to users in different locations, reducing latency.
+        b. Improves user experience by reducing network delays.
 
 
 Disadvantages of Sharding 🚨 :
