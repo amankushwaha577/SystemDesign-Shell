@@ -93,9 +93,12 @@ Tinder System Architecture (Scalable) :
          - If 🏠 existing user → fetches profile data.  
     3️⃣ Session Service stores session data in Redis for quick authentication.  
     4️⃣ Upon success, the user gets logged in and redirected to the dashboard. 
+-->
 
 
 
+
+<!-- 
 🖼️ 2️⃣ Profile Customization & Image Upload  :
 ------------------------------------------------
 🔹 Services Involved:  
@@ -107,9 +110,11 @@ Tinder System Architecture (Scalable) :
     2️⃣ Image Service processes and stores the image in S3/Cloud CDN for fast access  
     3️⃣ Profile is saved in PostgreSQL (Profile DB)  
     4️⃣ The app fetches the updated profile and shows it to the user  
+-->
 
 
 
+<!-- 
 ❤️ 3️⃣ Swipe & Match Process  
 🔹 Services Involved :  
     ✅ Matching Service – Manages swipes & match algorithm  
@@ -120,9 +125,11 @@ Tinder System Architecture (Scalable) :
     2️⃣ The Matching Service records the swipe in DynamoDB (Matches DB)  
     3️⃣ If both users swipe right, a match event is triggered  
     4️⃣ Recommendation Service (powered by AI) suggests new matches based on user preferences (stored in Neo4j GraphDB)  
+-->
 
 
 
+<!-- 
 💬 4️⃣ Real-time Chat & Messaging  
 🔹 Services Involved :  
     ✅ Chat Service – Handles messaging between matched users  
@@ -131,11 +138,29 @@ Tinder System Architecture (Scalable) :
 🔹  Flow : 
     1️⃣ When users match, a chat session is created in Cassandra (Chat DB)  
     2️⃣ Messages are sent in real-time using WebSockets (via Chat Service)  
+        Ques. Why we uses Peer-to-Peer commination(XMPP) not Client-server communication(HTTP) for chatting ? 
+        ANs. 🔴 High Latency Due to Request-Response Model :
+             -----------------------------------------------
+                 a. Every time a message is sent, the client has to make a request (HTTP POST /sendMessage).
+                 b. The server processes it, stores it, and responds back.
+                 c. This causes delays in real-time messaging.
+                 
+        💡 Example Issue: If two people chat, they must wait for each other's HTTP requests, causing slow message updates.
+
+            ✅ Why Peer-to-Peer (XMPP) is Better for Chatting?
+            --------------------------------------------------
+                 a. ⚡ Instant Message Delivery (Real-Time Push) : Server automatically push messages to client.
+                 b. XMPP uses a single TCP/WebSocket connection for two-way communication.
+                 c. No need for repeated HTTP requests—messages arrive instantly.
+
     3️⃣ Chats are stored in Cassandra (Chat Messages DB) for quick retrieval  
     4️⃣ The Session Service maintains an active user session, ensuring users receive messages instantly  
+-->
 
 
 
+
+<!-- 
 🔔 5️⃣ Push Notifications & Event Processing  
 🔹 Services Involved :  
     ✅ Push Notification Service – Sends notifications (matches, messages)  
@@ -145,9 +170,11 @@ Tinder System Architecture (Scalable) :
     1️⃣ If a user gets a match or message, a notification event is sent to Kafka  
     2️⃣ Kafka forwards the event to the Push Notification Service  
     3️⃣ The service uses Firebase / Twilio / SNS to send a real-time notification to the user’s device  
+-->
 
 
 
+<!-- 
 🗂️ 6️⃣ Media Storage & Caching  
 🔹 Services Involved :  
     ✅ S3 / Cloud Storage – Stores images and media  
@@ -156,9 +183,11 @@ Tinder System Architecture (Scalable) :
 🔹  Flow : 
     1️⃣ User profile images, chat media, and other assets are stored in S3  
     2️⃣ Frequently accessed data (like active sessions & chat history) is cached in Redis for quick retrieval  
+-->
 
 
 
+<!-- 
 🧠 7️⃣ AI-Based Moderation & Analytics  
 🔹 Services Involved :  
     ✅ AI Moderation Service – Scans content for inappropriate material  
