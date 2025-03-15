@@ -18,7 +18,7 @@ YouTube caches video metadata (titles, descriptions, thumbnails, likes, views, e
     | Encoding Details       | 200 bytes       |  
     | **Total**              | **~52 KB per video** |  
 
-2️⃣ Videos Served Per Second  
+2️⃣ Cache Requirement for 24 Hours   
    a. Assume YouTube serves 100,000 video requests per second globally.  
    b. If each request needs metadata, the total cache requirement per second is:  
 
@@ -29,15 +29,8 @@ YouTube caches video metadata (titles, descriptions, thumbnails, likes, views, e
                                                   = 449,280 GB/day
                                                   = 449 TB/day
 
-3️⃣ Cache Requirement for 24 Hours  
-    a. YouTube should cache metadata for at least the most popular videos (e.g., last 24 hours).  
-    b. Assume 200 million videos get views in a day.  
-    c. Total metadata cache required:  
-
-        200,000,000 videos × 52 KB = 10.4 TB  
-
 Final Estimation:  
-To optimize performance, YouTube may need **10-20 TB of cache** for video metadata in high-speed in-memory databases (like Redis or Memcached). 🚀  
+To optimize performance, YouTube may need **500 - 800 TB of cache** for video metadata in high-speed in-memory databases (like Redis or Memcached). 🚀  
 -->
 
 
@@ -61,4 +54,38 @@ Estimating the Number of Nodes Required for Metadata Caching :
     b. Eviction Strategies: Using Least Recently Used (LRU) eviction, YouTube caches only trending/popular videos, reducing total nodes required by 50-70%.  
 
 👉 Final estimated nodes needed (after optimizations) = 1,000 - 1,500 nodes 🚀  
+-->  
+
+
+
+<!--  
+Estimating the Number of Processors Required for Metadata Caching  
+
+1️⃣ Choosing the Cache Node Type :
+   a. Each cache node is assumed to have **256 GB RAM** and a high-performance CPU.  
+   b. Modern cache servers typically use **16-core CPUs** (e.g., Intel Xeon or AMD EPYC).  
+
+2️⃣ Processing Power Per Node :
+   a. A single Redis/Memcached node with **16 cores** can handle ~200,000 requests per second.  
+        i).  Since one node can handle 200,000 requests/sec, in theory, one node would be enough.
+        ii). But in reality, we distribute the load for fault tolerance and availability.
+        iii).But, We estimated 1,500 cache nodes earlier to store 449 TB of metadata cache.
+
+3️⃣ Total Requests Per Second :
+   a. YouTube serves **100,000 video metadata requests per second** globally.  
+   b. To handle redundancy and spikes, we assume a buffer and plan for **200,000 requests/sec**.  
+
+4️⃣ Number of Processor Required (Reality (without fault tolerante)) :
+   a. Each node is 16 cores CPU. So Each node can handle 200,000 requests/sec.  
+   b. Total Processor required = 200,000 / 200,000 = **1 Processor (in theory)**  
+
+   However, for **fault tolerance and distributed architecture**, we use **1,500 cache nodes** (from previous estimation).  
+
+5️⃣ Number of Processors Required (fault tolerante) :
+   a. If each node has a **16-core CPU**, then:  
+
+   b. Total cores required = 1,500 nodes × 16 cores per node  
+                           = **24,000 CPU cores**  
+
+👉 **Final estimation: YouTube needs ~24,000 CPU cores** for metadata caching globally. 🚀  
 -->  
