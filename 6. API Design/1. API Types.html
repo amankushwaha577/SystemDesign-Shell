@@ -1,0 +1,28 @@
+<!-- 
+API Design in System Design :
+---------------------------
+API design is a crucial part of system design, ensuring efficient, scalable, and maintainable communication 
+between different components of a system. 
+
+Types of APIs :
+-----------------
+1. RESTful APIs (Representational State Transfer) :
+    a. Uses HTTP methods (GET, POST, PUT, DELETE).
+    b. Follows a stateless architecture.
+    c. Uses JSON or XML for data exchange.
+    d. Example: GET /users/{id} → Fetch user details.
+
+2. GraphQL APIs :
+    a. Clients request exactly the data they need.
+    b. Uses a single endpoint (/graphql).
+    c. Example: Query to fetch a user and their posts in one request.
+
+3. gRPC (Google Remote Procedure Call) :
+    a. Uses Protocol Buffers (binary format, smaller & faster).
+    b. Good for microservices communication.
+    Example: getUser(id: 123) → User.
+
+4. WebSockets & Streaming APIs
+    Used for real-time communication (chats, notifications).
+    Example: ws://chat.example.com → Live chat updates.
+-->

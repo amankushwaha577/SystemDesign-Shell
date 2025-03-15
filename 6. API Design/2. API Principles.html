@@ -1,0 +1,34 @@
+<!-- 
+2️⃣ Key Principles of API Design :
+----------------------------------
+
+✅ Resource-Oriented Design (For REST APIs) :
+    a. Use nouns in URLs (/users, /orders).
+    b. Follow consistent and predictable naming conventions.
+
+✅ Statelessness :
+    a. Each API request must be independent and contain all necessary information.
+    b. No session storage on the server.
+
+✅ Versioning :
+    should be versioned (/api/v1/users) to support future updates without breaking existing clients.
+
+✅ Authentication & Security:
+    Use JWT (JSON Web Token) or OAuth2 for authentication.
+    Implement rate limiting to prevent abuse.
+    Encrypt sensitive data with HTTPS.
+
+✅ Pagination & Filtering :
+    Large datasets should support pagination (?page=1&limit=20).
+    Enable filtering (/users?role=admin&status=active).
+
+✅ Error Handling (Consistent Responses)
+    Use proper HTTP status codes:
+    200 OK → Success
+    201 Created → Resource Created
+    400 Bad Request → Invalid request
+    401 Unauthorized → Authentication failure
+    404 Not Found → Resource not found
+    500 Internal Server Error → Server issue
+ 
+-->
