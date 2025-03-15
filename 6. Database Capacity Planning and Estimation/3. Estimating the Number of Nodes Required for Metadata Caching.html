@@ -1,0 +1,55 @@
+<!-- 
+Estimating the Number of Nodes Required for Metadata Caching in YouTube :
+------------------------------------------------------------------------
+YouTube caches video metadata across multiple distributed nodes to ensure fast access and high availability. 
+Let's estimate the number of nodes required to handle metadata caching efficiently.
+
+----------------------------------------------------
+1. Metadata Storage Estimation :
+----------------------------------------------------
+Each video has approximately **3 KB** of metadata.  
+For **1.4 billion videos** cached (7-day retention):
+
+    1.4B × 3 KB = 4.2 TB
+
+
+----------------------------------------------------
+2. Choosing Cache Node Specifications
+----------------------------------------------------
+To determine the number of cache nodes required, we need to consider:  
+- **RAM per Node**: Assume each node has **128 GB of RAM** (common for caching servers).  
+- **Reserved Space for Overhead**: System overhead, indexes, and redundancy consume about **20%** of available memory.  
+
+    a). effective memory per node = 128 GB × 0.8
+                                  = 102.4 GB
+
+    b). Total cache size needed = 4.2 TB 
+                                = 4200 GB
+
+    Number of nodes required = 4200 GB ÷ 102.4 GB/node
+                             ≈ 41 nodes
+          
+                             
+----------------------------------------------------
+3. Each node can store:
+----------------------------------------------------
+    102.4 GB ÷ 3 KB ≈ 34.1 million videos per node
+
+
+
+----------------------------------------------------
+4. Scaling Considerations
+----------------------------------------------------
+To ensure reliability and scalability, we introduce **replication (factor of 2)** and **fault tolerance (additional 20%)**:
+
+    41 × 2 = 82
+
+    82 × 1.2 = 98.4 ≈ 100 nodes
+
+    
+----------------------------------------------------
+5. Conclusion
+----------------------------------------------------
+YouTube needs **approximately 100 caching nodes** (each with **128 GB RAM**) 
+to efficiently store and serve metadata while ensuring redundancy and fault tolerance. 🚀
+-->

@@ -1,91 +1,77 @@
-<!--  
-Estimated Cache Requirement for YouTube Video Metadata :
-------------------------------------------------------
+<!-- 
+Estimating Cache Requirement for YouTube Video Metadata :
+----------------------------------------------------------
 
-YouTube caches video metadata (titles, descriptions, thumbnails, likes, views, etc.) to speed up searches and recommendations. Let’s estimate how much cache memory is needed.  
+YouTube relies heavily on caching to reduce database load and ensure fast access to video metadata. 
+This estimation considers caching at both edge locations (CDN) and primary data centers.
 
-1️⃣ Metadata Size Per Video  
-    Typical metadata fields for a single video:  
-    | Field                  | Estimated Size  |  
-    |------------------------|----------------|  
-    | Video ID               | 16 bytes (UUID) |  
-    | Title                  | 100 bytes       |  
-    | Description            | 500 bytes       |  
-    | Thumbnails             | 50 KB           |  
-    | Tags                   | 200 bytes       |  
-    | Views, Likes, Comments | 20 bytes       |  
-    | Uploader Info          | 100 bytes       |  
-    | Encoding Details       | 200 bytes       |  
-    | **Total**              | **~52 KB per video** |  
+----------------------------------------------
+1. Understanding Metadata Storage Requirements :
+----------------------------------------------
+    Each YouTube video has associated metadata, which includes:
 
-2️⃣ Cache Requirement for 24 Hours   
-   a. Assume YouTube serves 100,000 video requests per second globally.  
-   b. If each request needs metadata, the total cache requirement per second is:  
+    | Metadata Type                          |Estimated Size  |
+    |----------------------------------------|----------------|
+    | Video ID (Unique Key)                  | 16 bytes       |
+    | Title, Description, Tags               | ~1 KB          |
+    | Thumbnail URLs                         | ~512 bytes     |
+    | Upload Date, Duration, Category        | ~128 bytes     |
+    | Views, Likes, Comments Count           | ~256 bytes     |
+    | User Info (Uploader ID, Channel Name)  | ~512 bytes     |
+    | Encoding & Resolution Details          | ~512 bytes     |
+    | **Total Estimated Metadata per Video** | **~3 KB**      |
 
-         100,000 videos × 52 KB = 5.2 GB/sec  
 
-        i).  There are 86,400 seconds in a day (24 × 60 × 60).
-        ii). Total metadata storage needed per day= 5.2 GB/sec × 86,400 sec/day
-                                                  = 449,280 GB/day
-                                                  = 449 TB/day
+----------------------------------------------
+2. Number of Videos will be cached :
+----------------------------------
+- YouTube has **~2.5 billion active users**.  
+- Estimated **1 billion videos are watched per day**.  
+- Assume metadata for the **last 7 days is cached** to handle trends.  
 
-Final Estimation:  
-To optimize performance, YouTube may need **500 - 800 TB of cache** for video metadata in high-speed in-memory databases (like Redis or Memcached). 🚀  
+    a. **Metadata Cache for Popular Videos.**  
+    b. YouTube prioritizes caching videos with high engagement.
+    c. Assuming **200 million unique videos are watched per day**, metadata for at least **7 days** is cached:
+
+    Number of Videos will be cached in 1 Week = 200M × 7 = 1.4 billion videos**
+
+
+----------------------------------------------
+3. Estimating Total Metadata Cache Requirement
+----------------------------------------------------
+    Total Storage for Number of Videos will be cached in 1 Week = **1.4 billion videos** cached:
+                                                                = **1.4B × 3 KB = 4.2 TB**
+
+    Thus, YouTube requires approximately **4.2 TB of cache storage for video metadata**.
+
+
+---------------------------------------------------
+4. Caching Strategy for Efficiency
+----------------------------------------------------
+
+   **Multi-Tiered Caching**
+   - **L1 Cache (Edge/CDN Cache):** Stores metadata of most-watched videos.
+   - **L2 Cache (Regional Data Centers):** Stores metadata for recently watched videos.
+   - **L3 Cache (Database Cache - Redis, Bigtable):** Fetches metadata from storage if not found in L1/L2.
+
+    | Component                                               | Cache Size Needed |
+    |---------------------------------------------------------|-------------------|
+    | **L1 Edge CDN Cache (Top 10M videos)**                  | ~30 GB            |
+    | **L2 Regional Data Centers (Last 7 Days, 1.4B videos)** | ~4.2 TB           |
+    | **L3 Database Cache (Redis, Bigtable Backup)**          | ~10 TB            | => 15TB Average
+
+    ----------------------------------------------------
+    5. Final Cache Estimation : → ~15 TB
+    ----------------------------------------------------
+    YouTube requires **~15 TB of metadata cache** across different caching layers to ensure fast metadata retrieval
+
+    Note :
+    i). Cache Eviction Policy :
+        LRU (Least Recently Used):** Removes older, less accessed metadata.
+        TTL (Time-to-Live):** Keeps trending video metadata for **7-14 days**.
+
+    ii). Fast Access Caching Technology :
+        Redis / Memcached** for real-time lookups.
+        Bigtable / Spanner** for persistent storage.
 -->
 
-
-<!--  
-Estimating the Number of Nodes Required for Metadata Caching :
-
-1️⃣ Choosing the Cache Node Type  
-    a. Assume YouTube uses high-performance Redis or Memcached nodes.  
-    b. A typical high-memory server has 256 GB RAM per node.  
-    c. To ensure fast access, we assume all metadata is stored in memory (RAM).  
-
-2️⃣ Number of Nodes Required  
-    a. Total cache requirement per day: 449 TB = 449,000 GB  
-    b. Each node can handle 256 GB of cached metadata.  
-
-    Total nodes required = 449,000 GB / 256 GB per node  
-                        ≈ 1,754 nodes  
-
-3️⃣ Optimization with Replication & Eviction Policies  
-    a. Replication (e.g., Master-Slave): For fault tolerance, YouTube likely keeps at least 2 replicas, meaning 3,508 nodes (1,754 × 2).  
-    b. Eviction Strategies: Using Least Recently Used (LRU) eviction, YouTube caches only trending/popular videos, reducing total nodes required by 50-70%.  
-
-👉 Final estimated nodes needed (after optimizations) = 1,000 - 1,500 nodes 🚀  
--->  
-
-
-
-<!--  
-Estimating the Number of Processors Required for Metadata Caching  
-
-1️⃣ Choosing the Cache Node Type :
-   a. Each cache node is assumed to have **256 GB RAM** and a high-performance CPU.  
-   b. Modern cache servers typically use **16-core CPUs** (e.g., Intel Xeon or AMD EPYC).  
-
-2️⃣ Processing Power Per Node :
-   a. A single Redis/Memcached node with **16 cores** can handle ~200,000 requests per second.  
-        i).  Since one node can handle 200,000 requests/sec, in theory, one node would be enough.
-        ii). But in reality, we distribute the load for fault tolerance and availability.
-        iii).But, We estimated 1,500 cache nodes earlier to store 449 TB of metadata cache.
-
-3️⃣ Total Requests Per Second :
-   a. YouTube serves **100,000 video metadata requests per second** globally.  
-   b. To handle redundancy and spikes, we assume a buffer and plan for **200,000 requests/sec**.  
-
-4️⃣ Number of Processor Required (Reality (without fault tolerante)) :
-   a. Each node is 16 cores CPU. So Each node can handle 200,000 requests/sec.  
-   b. Total Processor required = 200,000 / 200,000 = **1 Processor (in theory)**  
-
-   However, for **fault tolerance and distributed architecture**, we use **1,500 cache nodes** (from previous estimation).  
-
-5️⃣ Number of Processors Required (fault tolerante) :
-   a. If each node has a **16-core CPU**, then:  
-
-   b. Total cores required = 1,500 nodes × 16 cores per node  
-                           = **24,000 CPU cores**  
-
-👉 **Final estimation: YouTube needs ~24,000 CPU cores** for metadata caching globally. 🚀  
--->  
