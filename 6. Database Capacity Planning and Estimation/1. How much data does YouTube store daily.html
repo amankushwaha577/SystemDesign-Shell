@@ -6,19 +6,29 @@ YouTube handles an enormous volume of video uploads every day.
 To estimate the total storage required per day, we break it down step by step.  
 
 1️⃣ Video Upload Rate  :  
+-----------------------
    According to recent estimates, YouTube receives "500 hours of video uploads per minute" from users worldwide.  
 
 2️⃣ Estimating Storage Per Minute :
+---------------------------------
     a. The average file size for 1 hour of 1080p HD video is around 2.5 GB.  
-    b. Since 500 hours of video are uploaded per minute, the total size per minute is:  
+       Ex : The file size of a video depends on factors like resolution, codec, and bitrate. Using H.264 codec, we estimate:
+                360p (Low Quality): ~300 MB per hour
+                720p (HD): ~1 GB per hour
+                1080p (Full HD): ~2 GB per hour
+                4K (Ultra HD): ~10 GB per hour
+        Assuming an average mix of 1080p and 720p content, we approximate 2.5 GB per hour.
 
+    b. Since 500 hours of video are uploaded per minute, the total size per minute is:  
        The total size per minute is => 500 hours × 2.5 GB/hour = 1250 GB/min (or 1.25 TB/min)  
 
 3️⃣ Estimating Storage Per Day :
+------------------------------
     a. There are 1440 minutes in a day, so:  
     b. 1.25 TB/min × 1440 min/day = 1800 TB/day (or 1.8 PB/day)  
 
-4️⃣ Factors Affecting Storage  
+4️⃣ Factors Affecting Storage :
+------------------------------
     While the raw data estimate is 1.8 PB/day, the actual storage YouTube needs is higher due to:  
 
     ✔️ Multiple Resolutions: YouTube stores each video in various formats (144p, 240p, 360p, 480p, 720p, 1080p, 4K, 8K), increasing storage needs.  
@@ -27,5 +37,6 @@ To estimate the total storage required per day, we break it down step by step.
     ✔️ Compression & Optimization: YouTube uses advanced compression techniques (VP9, AV1) to reduce file sizes.  
 
 Final Answer:  
-YouTube stores approximately 1.8 PB of new data every day, but with multiple resolutions, backups, and metadata, the actual storage requirement may exceed 3-5 PB per day.
+YouTube stores approximately 1.8 PB of new data every day, but with multiple resolutions, backups, and metadata, 
+the actual storage requirement may exceed 3-5 PB per day.
 -->
