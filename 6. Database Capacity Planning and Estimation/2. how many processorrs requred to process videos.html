@@ -1,0 +1,58 @@
+<!-- 
+========================================================================================
+    Estimating the Number of Processors Required  for Video Processing in YouTube
+========================================================================================
+
+a. There will be 500 hour videos per minute will be upload.
+b. The average unproceessed file size for 1 hour video of 1080p HD video is around 2.5 GB.  
+c. how many processorrs requred to process videos ?
+
+----------------------------------------------------
+1. Understanding the Upload Rate
+----------------------------------------------------
+   a. 500 hours of video uploaded per minute  
+   b. Each 1-hour 1080p HD video ≈ 2.5 GB (unprocessed size)
+
+   Total unprocessed data uploaded per minute =  500 hours × 2.5 GB/hour 
+                                              = 1250 GB/min 
+                                              = 1.25 TB/min
+
+
+                                              
+----------------------------------------------------
+2. Processing Time and Compute Power
+----------------------------------------------------
+### Assumptions:
+    a. Processing Speed Per Core: 
+       A high-performance server-grade CPU core (e.g., Intel Xeon, AMD EPYC) processes **1 GB of video in ~30 seconds**.
+    b. Parallel Processing:  
+       Each core can process **2 GB of video per minute**.
+    c. Redundancy Factor: 
+       To handle peak loads and failures, we add a **20% buffer**.
+
+
+
+----------------------------------------------------
+3. Estimating Required Processors
+----------------------------------------------------
+    Total processing required per minute:
+
+        1.25 TB = 1250 GB
+
+    Since each core can process **2 GB/min**, the number of cores needed:
+
+        1250 GB ÷ 2 GB/core = 625 cores
+
+    Applying a **20% redundancy factor**:
+
+        625 × 1.2 = 750 cores
+
+
+
+----------------------------------------------------
+4. Conclusion
+----------------------------------------------------
+To process **500 hours of video uploaded per minute**, YouTube needs **approximately 750 CPU cores**.
+
+This estimate assumes optimal parallelism and processing efficiency. 
+-->
