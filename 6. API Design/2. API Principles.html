@@ -1,34 +1,107 @@
 <!-- 
-2️⃣ Key Principles of API Design :
-----------------------------------
+2️⃣ Simple API Design Rules:
+----------------------------
 
-✅ Resource-Oriented Design (For REST APIs) :
-    a. Use nouns in URLs (/users, /orders).
-    b. Follow consistent and predictable naming conventions.
+✅ Use Clear Naming & Simple URLs:
+    a. Use names in URLs that describe things clearly (/users, /orders).
+    b. Keep names consistent and easy to understand.
+    c. Avoid unnecessary details in URLs.
 
-✅ Statelessness :
-    a. Each API request must be independent and contain all necessary information.
-    b. No session storage on the server.
+    ❌ **What NOT to Do:**  
+    a. /getAllUsersData (Too long, unclear)  
+    b. /api/v1/getUserInfoById?id=123 (Confusing query usage)  
+    c. Instead ✅: /users/123 (Clear & structured)
 
-✅ Versioning :
-    should be versioned (/api/v1/users) to support future updates without breaking existing clients.
 
-✅ Authentication & Security:
-    Use JWT (JSON Web Token) or OAuth2 for authentication.
-    Implement rate limiting to prevent abuse.
-    Encrypt sensitive data with HTTPS.
+✅ Every Request Stands Alone (Statelessness):
+    a. Each API request should have all the needed info.
+    b. Don't store user sessions on the server.
 
-✅ Pagination & Filtering :
-    Large datasets should support pagination (?page=1&limit=20).
-    Enable filtering (/users?role=admin&status=active).
+    ❌ **What NOT to Do:**  
+    a. Keeping login sessions in memory.  
+    b. Relying on the server to remember the user.  
+    c. Instead ✅: Send tokens (JWT, API keys) in each request.
 
-✅ Error Handling (Consistent Responses)
-    Use proper HTTP status codes:
-    200 OK → Success
-    201 Created → Resource Created
-    400 Bad Request → Invalid request
-    401 Unauthorized → Authentication failure
-    404 Not Found → Resource not found
-    500 Internal Server Error → Server issue
- 
+
+✅ Use Version Numbers:
+    a. Add versions to APIs (/api/v1/users) so updates don’t break old versions.
+
+    ❌ **What NOT to Do:**  
+    a. Changing API response formats without versioning.  
+    b. Instead ✅ : /api/v2/users when introducing a breaking change.
+
+
+✅ Secure Your API:
+    a. Use JWT or OAuth2 to check user identity.
+    b. Limit requests to stop abuse.
+    c. Always use HTTPS to protect data.
+
+    ❌ **What NOT to Do:**  
+    a. Sending passwords or tokens in URLs (/users/123?password=secret).  
+    b. Allowing unlimited requests (risk of DDoS).  
+    c. Instead ✅ : Use request headers for sensitive data.
+
+✅ Support Large Data:
+    a. Break big data into pages (?page=1&limit=20).
+    b. Allow filtering (/users?role=admin&status=active).
+
+    ❌ **What NOT to Do:**  
+    a. Returning **thousands** of records in one response.  
+    b. Instead ✅ : Use pagination (/users?page=1&limit=20).
+
+✅ Handle Errors Properly:
+    a. Give clear error messages, not just "Something went wrong."
+    b. Use correct HTTP codes:
+        200 OK → Everything is good  
+        201 Created → New item added  
+        400 Bad Request → Wrong request  
+        401 Unauthorized → Not allowed  
+        404 Not Found → Can’t find it  
+        500 Internal Server Error → Something broke on the server  
+
+    ❌ **Bad Error Handling:**
+    a. Returning unclear or misleading error messages:
+        - "Something went wrong."  
+        - `{ "error": true }` (No explanation)
+    b. Instead ✅, return **useful error messages**:
+      ```json
+      {
+        "error": "User not found",
+        "code": 404
+      }
+      ```
+
+✅ Use Parameters Correctly:
+    Parameters help APIs get specific data or control what they return.
+    a. Path Parameters (Required) :
+       Used to get a specific item.
+       Example: /users/{id} → /users/123  
+    b. Query Parameters (Optional) :
+       Used for filtering or sorting.
+       Example: /users?role=admin&status=active  
+    c. Body Parameters :
+       Used in POST/PUT requests to send data.
+       Example (JSON Body in POST Request):
+       ```json
+       {
+         "name": "John",
+         "email": "john@example.com"
+       }
+       ```
+
+    ❌ **Misusing API Parameters:**
+       a. Using query parameters for required data:
+           `/users?userId=123` (should be a path parameter instead || query parameter is for querying)
+       b. Not using body parameters for POST/PUT:
+          Sending JSON data inside query string (`/createUser?name=John`)
+       c. Use parameters correctly ✅ :
+            - Path Parameter: `/users/123`
+            - Query Parameter: `/users?role=admin`
+            - Body Parameter:
+                ```json
+                {
+                "name": "John",
+                "email": "john@example.com"
+                }
+        ```
 -->
