@@ -111,20 +111,25 @@
 Please avoids side effects :
 ---------------------------
 ✅ No Unexpected Data Changes  
-   - GET requests should not modify data (ensured by statelessness).  
-   - POST, PUT, DELETE requests require explicit user action.  
+    a. GET requests should not modify data (ensured by statelessness).  
+    b. POST, PUT, DELETE requests require explicit user action.  
 
 ✅ Idempotency Maintained  
-   - GET, DELETE: Safe to call multiple times.  
-   - PUT: Repeated calls with the same data won’t create duplicates.  
-   - POST: Only used when creating a new resource.  
+    a. GET, DELETE: Safe to call multiple times.  
+    b. PUT: Repeated calls with the same data won’t create duplicates.  
+    c. POST: Only used when creating a new resource.  
 
 ✅ No Sensitive Data in URLs  
-   - Passwords, API keys, and tokens are not exposed in query parameters.  
+    a. Passwords, API keys, and tokens are not exposed in query parameters.  
 
 ✅ Secure & Scalable API  
-   - Enforces rate limiting, HTTPS encryption, and JWT authentication to prevent abuse.  
+    a. Enforces rate limiting, HTTPS encryption, and JWT authentication to prevent abuse.  
 
 ✅ Consistent & Clear Error Handling  
-   - Provides meaningful errors without leaking unnecessary system details.  
--->
+    a. Provides meaningful errors without leaking unnecessary system details.  
+
+✅ Atomicity (All or Nothing)  
+    a. API operations should be fully completed or not executed at all.  
+    b. If a request fails in the middle, the system must roll back changes.  
+    c. Example: In a money transfer API, deducting from one account must also credit another—both must succeed or fail together.  
+   -->
