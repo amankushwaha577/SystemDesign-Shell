@@ -123,19 +123,21 @@ How Cassandra Works (Simple Explanation) :
 
 ✅ Fast writes & reads without slowing down!  
 
+
 4️⃣ Gossip Protocol (Communication Between Nodes)  
 --------------------------------------------------
-💬 How do nodes talk to each other?  
-- Cassandra nodes share updates using the Gossip Protocol (like whispering important news).  
-- Every few seconds, nodes check if their neighbors are alive.  
+    💬 How do nodes talk to each other?  
+    a. Cassandra nodes share updates using the Gossip Protocol (like whispering important news).  
+    b. Every few seconds, nodes check if their neighbors are alive.  
 
 ✅ If one node fails, others take over without breaking the system!  
 
+
 5️⃣ Scaling (Adding More Nodes)  
 ---------------------------------
-📈 What if we need more storage?  
-- Cassandra allows adding new nodes easily (like adding new bookshelves).  
-- Data automatically redistributes without stopping operations.  
+    📈 What if we need more storage?  
+    a. Cassandra allows adding new nodes easily (like adding new bookshelves).  
+    b. Data automatically redistributes without stopping operations.  
 
 ✅ Infinite scaling = more power without downtime!  
 
