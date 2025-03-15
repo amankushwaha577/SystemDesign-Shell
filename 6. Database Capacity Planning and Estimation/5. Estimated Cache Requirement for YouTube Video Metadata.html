@@ -2,8 +2,11 @@
 Estimating Cache Requirement for YouTube Video Metadata :
 ----------------------------------------------------------
 
-YouTube relies heavily on caching to reduce database load and ensure fast access to video metadata. 
-This estimation considers caching at both edge locations (CDN) and primary data centers.
+a. YouTube has **~2.5 billion active users**.  
+b. Estimated **1 billion videos are watched per day**.  
+c. Assume metadata for the **last 7 days is cached** to handle trends. 
+d. Assuming **200 million unique videos are watched per day**.
+   Estimate Cache Requirement for YouTube Video Metadata ?
 
 ----------------------------------------------
 1. Understanding Metadata Storage Requirements :
@@ -24,7 +27,7 @@ This estimation considers caching at both edge locations (CDN) and primary data 
 
 ----------------------------------------------
 2. Number of Videos will be cached :
-----------------------------------
+----------------------------------------------
 - YouTube has **~2.5 billion active users**.  
 - Estimated **1 billion videos are watched per day**.  
 - Assume metadata for the **last 7 days is cached** to handle trends.  
@@ -45,6 +48,7 @@ This estimation considers caching at both edge locations (CDN) and primary data 
     Thus, YouTube requires approximately **4.2 TB of cache storage for video metadata**.
 
 
+    
 ---------------------------------------------------
 4. Caching Strategy for Efficiency
 ----------------------------------------------------
